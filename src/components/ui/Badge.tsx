@@ -11,7 +11,7 @@ export const Badge: React.FC<BadgeProps> = ({
   className = '',
   size = 'sm',
 }) => {
-  const sizeClass = size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-2xl';
+  const sizeClass = size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-3xl';
 
   return (
     <span
