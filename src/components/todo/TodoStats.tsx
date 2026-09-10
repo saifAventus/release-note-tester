@@ -20,7 +20,7 @@ export const TodoStats: React.FC<TodoStatsProps> = ({
     <section className="bg-slate-900/60 backdrop-blur-md rounded-3xl border border-slate-800/80 p-5 shadow-xl">
       {/* Metrics Row */}
       <div className="grid grid-cols-3 gap-3 mb-4">
-        <div className="bg-slate-950/50 rounded-xl p-3 border border-slate-800/50 flex items-center gap-3">
+        <div className="bg-slate-950/50 rounded-xl p-4 border border-slate-800/50 flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
             <ListTodo className="w-5 h-5" />
           </div>
