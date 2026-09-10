@@ -1,0 +1,33 @@
+name: Create release tag from Jira
+
+on:
+  repository_dispatch:
+    types:
+      - jira-release
+
+permissions:
+  contents: write
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Git tag
+        env:
+          RELEASE_VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          TAG="v${RELEASE_VERSION}"
+
+          echo "Creating tag: ${TAG}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git tag "${TAG}"
+          git push origin "${TAG}"
