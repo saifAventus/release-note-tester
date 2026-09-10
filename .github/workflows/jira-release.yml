@@ -1,6 +1,13 @@
 name: Create release tag from Jira
 
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (example: 1.0.0)"
+        required: true
+        type: string
+
   repository_dispatch:
     types:
       - jira-release
@@ -18,16 +25,37 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get release version
+        id: release
+        env:
+          MANUAL_VERSION: ${{ inputs.version }}
+          JIRA_VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          if [ -n "$MANUAL_VERSION" ]; then
+            VERSION="$MANUAL_VERSION"
+          else
+            VERSION="$JIRA_VERSION"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Create Git tag
         env:
-          RELEASE_VERSION: ${{ github.event.client_payload.version }}
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
         run: |
           TAG="v${RELEASE_VERSION}"
 
           echo "Creating tag: ${TAG}"
 
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag ${TAG} already exists."
+            exit 1
+          fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git tag "${TAG}"
-          git push origin "${TAG}"
+          git tag "$TAG"
+          git push origin "$TAG"
+
+          echo "Successfully created ${TAG}"
