@@ -30,7 +30,7 @@ export const App: React.FC = () => {
   } = useTodos();
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative overflow-hidden py-9 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative overflow-hidden py-10 px-4 sm:px-6 lg:px-8">
       {/* Decorative ambient background glows */}
       <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-[40%] right-[10%] w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
