@@ -35,8 +35,8 @@
     [
       "@open-turo/semantic-release-jira",
       {
-        "jiraServerUrl": "aventusinformatics-team-xa3a5udd.atlassian.net",
-        "jiraUsername": "${JIRA_USERNAME}",
+        "jiraServerUrl": "${JIRA_SERVER_URL}",
+        "jiraUsername": "${JIRA_USER_EMAIL}",
         "jiraApiToken": "${JIRA_API_TOKEN}",
         "transitionIssues": true,
         "transitionToStatus": "Released",

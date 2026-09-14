@@ -35,8 +35,7 @@ jobs:
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-          JIRA_USERNAME: ${{ secrets.JIRA_USER_EMAIL }}
-
-          JIRA_API_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN}}
+          SEMANTIC_RELEASE_JIRA_SERVER_URL: ${{ secrets.JIRA_SERVER_URL }}
+          SEMANTIC_RELEASE_JIRA_USERNAME: ${{ secrets.JIRA_USER_EMAIL }}
+          SEMANTIC_RELEASE_JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
