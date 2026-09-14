@@ -1,3 +1,13 @@
+# [3.0.0](https://github.com/saifAventus/release-note-tester/compare/v2.0.0...v3.0.0) (2026-09-14)
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-27](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-27): change color to red
+- [DRNT2-28](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-28): colour chage
+
 # [2.0.0](https://github.com/saifAventus/release-note-tester/compare/v1.2.0...v2.0.0) (2026-09-14)
 
 
