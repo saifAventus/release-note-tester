@@ -1,3 +1,17 @@
+## [1.0.1](https://github.com/saifAventus/release-note-tester/compare/v1.0.0...v1.0.1) (2026-09-14)
+
+
+### Bug Fixes
+
+* [DRNT2-24](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-24) colour issue ([db6560d](https://github.com/saifAventus/release-note-tester/commit/db6560dfcac42f4319e4c7d1d83edbb6c2cd7f0a))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-24](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-24): colour issue
+
 # 1.0.0 (2026-09-14)
 
 
