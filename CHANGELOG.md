@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/saifAventus/release-note-tester/compare/v1.1.1...v1.2.0) (2026-09-14)
+
+
+### Features
+
+* [DRNT2-23](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-23) filter products ([e9b76fb](https://github.com/saifAventus/release-note-tester/commit/e9b76fbd65d536ca6f23dbcbddf750c665f994de))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-23](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-23): filter products
+- [DRNT2-26](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-26): create  new release
+
 ## [1.1.1](https://github.com/saifAventus/release-note-tester/compare/v1.1.0...v1.1.1) (2026-09-14)
 
 
