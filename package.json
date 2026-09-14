@@ -17,11 +17,17 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@open-turo/semantic-release-jira": "^1.0.2",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^11.0.1",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.1.0",
     "oxlint": "^1.79.0",
+    "semantic-release": "^25.0.9",
+    "semantic-release-jira-notes": "^4.0.2",
     "typescript": "~6.0.2",
     "vite": "^8.2.2"
   }

@@ -1,61 +1,41 @@
-name: Create release tag from Jira
+name: Release Pipeline
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Release version (example: 1.0.0)"
-        required: true
-        type: string
-
-  repository_dispatch:
-    types:
-      - jira-release
-
-permissions:
-  contents: write
+  push:
+    branches:
+      - main
 
 jobs:
-  create-tag:
+  release:
+    name: Run Semantic Release
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
-      - name: Get release version
-        id: release
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Execute Semantic Release
+        run: npx semantic-release
         env:
-          MANUAL_VERSION: ${{ inputs.version }}
-          JIRA_VERSION: ${{ github.event.client_payload.version }}
-        run: |
-          if [ -n "$MANUAL_VERSION" ]; then
-            VERSION="$MANUAL_VERSION"
-          else
-            VERSION="$JIRA_VERSION"
-          fi
+          GITHUB_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          JIRA_USERNAME: ${{ secrets.JIRA_USER_EMAIL }}
 
-      - name: Create Git tag
-        env:
-          RELEASE_VERSION: ${{ steps.release.outputs.version }}
-        run: |
-          TAG="v${RELEASE_VERSION}"
-
-          echo "Creating tag: ${TAG}"
-
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "Tag ${TAG} already exists."
-            exit 1
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git tag "$TAG"
-          git push origin "$TAG"
-
-          echo "Successfully created ${TAG}"
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
