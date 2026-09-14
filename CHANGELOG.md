@@ -1,3 +1,17 @@
+## [1.1.1](https://github.com/saifAventus/release-note-tester/compare/v1.1.0...v1.1.1) (2026-09-14)
+
+
+### Bug Fixes
+
+* [DRNT2-25](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-25) font issue ([846d4b3](https://github.com/saifAventus/release-note-tester/commit/846d4b384e6ef01c37ec8ec5bfc4aca8547bcefb))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-25](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-25): font issue
+
 # [1.1.0](https://github.com/saifAventus/release-note-tester/compare/v1.0.1...v1.1.0) (2026-09-14)
 
 
