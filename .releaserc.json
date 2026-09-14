@@ -19,6 +19,7 @@
             "release": "patch"
           },
           {
+            "type": "major",
             "breaking": true,
             "release": "major"
           }
