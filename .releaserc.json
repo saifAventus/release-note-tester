@@ -1,5 +1,5 @@
 {
-  "branches": ["main"],
+  "branches": ["release"],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -34,10 +34,11 @@
     ],
     [
       "@open-turo/semantic-release-jira",
+
       {
-        "jiraServerUrl": "${JIRA_SERVER_URL}",
-        "jiraUsername": "${JIRA_USER_EMAIL}",
-        "jiraApiToken": "${JIRA_API_TOKEN}",
+        "jiraServerUrl": "${SEMANTIC_RELEASE_JIRA_SERVER_URL}",
+        "jiraUsername": "${SEMANTIC_RELEASE_JIRA_USERNAME}",
+        "jiraApiToken": "${SEMANTIC_RELEASE_JIRA_API_TOKEN}",
         "transitionIssues": true,
         "transitionToStatus": "Released",
         "createVersions": true
