@@ -1,3 +1,24 @@
+# [3.1.0](https://github.com/saifAventus/release-note-tester/compare/v3.0.0...v3.1.0) (2026-09-15)
+
+
+### Features
+
+* add TodoStats component to display task metrics and management actions ([3acc7ce](https://github.com/saifAventus/release-note-tester/commit/3acc7cedfe9f0e12c9e09b3baf786d8603c7753e))
+* update the gap of the heigh ([c807e75](https://github.com/saifAventus/release-note-tester/commit/c807e75cc668e2d181f4d151a258ce0f993ec00f))
+* update the gap of the text ([9efbcec](https://github.com/saifAventus/release-note-tester/commit/9efbcece2c1a148f16cf101c3da61bd608b4e3fe))
+* updated the spacing for ([e7852ea](https://github.com/saifAventus/release-note-tester/commit/e7852ea07c5ca7479979e908e0bdd1aab6454777))
+* updated the spacing for header ([6e63372](https://github.com/saifAventus/release-note-tester/commit/6e633720e2b408d67e4260218aa721bebd60bd2f))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-33](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-33): update the colour to red
+- [DRNT2-34](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-34): update the button colour to green
+- [DRNT2-35](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-35): update the padding
+- [DRNT2-36](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-36): update the margin
+
 # [3.0.0](https://github.com/saifAventus/release-note-tester/compare/v2.0.0...v3.0.0) (2026-09-14)
 
 
