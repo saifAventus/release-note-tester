@@ -1,3 +1,17 @@
+# [3.2.0](https://github.com/saifAventus/release-note-tester/compare/v3.1.0...v3.2.0) (2026-09-15)
+
+
+### Features
+
+* update the spacing sizing ([5e3d328](https://github.com/saifAventus/release-note-tester/commit/5e3d32856cb70c9c22acd394d520433c4854dbe6))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-43](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-43): update text colour to green
+
 # [3.1.0](https://github.com/saifAventus/release-note-tester/compare/v3.0.0...v3.1.0) (2026-09-15)
 
 
