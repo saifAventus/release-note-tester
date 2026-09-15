@@ -37,7 +37,7 @@ export const App: React.FC = () => {
       <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Centered App Container */}
-      <div className="w-full max-w-3xl mx-auto relative z-10 flex flex-col gap-6">
+      <div className="w-full max-w-3xl mx-auto relative z-10 flex flex-col gap-5">
         {/* Header */}
         <header className="text-center space-y-5">
           <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wide uppercase shadow-inner">
