@@ -30,14 +30,14 @@ export const App: React.FC = () => {
   } = useTodos();
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative overflow-hidden py-3 px-5 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative overflow-hidden py-2 px-4 sm:px-6 lg:px-8">
       {/* Decorative ambient background glows */}
       <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-[40%] right-[10%] w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Centered App Container */}
-      <div className="w-full max-w-3xl mx-auto relative z-10 flex flex-col gap-6">
+      <div className="w-full max-w-3xl mx-auto relative z-10 flex flex-col gap-5">
         {/* Header */}
         <header className="text-center space-y-5">
           <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wide uppercase shadow-inner">
