@@ -45,7 +45,7 @@ export const App: React.FC = () => {
             <span>Clean Architecture Demo</span>
           </div>
 
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
               <CheckSquare2 className="w-6 h-6" />
             </div>
