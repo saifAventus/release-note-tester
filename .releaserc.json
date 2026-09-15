@@ -25,51 +25,13 @@
         ]
       }
     ],
-
     [
       "semantic-release-jira-notes",
       {
         "jiraHost": "aventusinformatics-team-xa3a5udd.atlassian.net",
-        "ticketPrefixes": ["DRNT2"],
-
-        "preset": "conventionalcommits",
-
-        "presetConfig": {
-          "types": [
-            {
-              "type": "feat",
-              "section": "Features"
-            },
-            {
-              "type": "fix",
-              "section": "Bug Fixes"
-            },
-            {
-              "type": "perf",
-              "section": "Performance"
-            },
-            {
-              "type": "docs",
-              "section": "Documentation"
-            },
-            {
-              "type": "refactor",
-              "section": "Refactoring"
-            },
-            {
-              "type": "test",
-              "section": "Tests"
-            },
-            {
-              "type": "chore",
-              "section": "Other Changes",
-              "hidden": false
-            }
-          ]
-        }
+        "ticketPrefixes": ["DRNT2"]
       }
     ],
-
     [
       "@open-turo/semantic-release-jira",
       {
@@ -81,21 +43,18 @@
         "createVersions": true
       }
     ],
-
     [
       "@semantic-release/changelog",
       {
         "changelogFile": "CHANGELOG.md"
       }
     ],
-
     [
       "@semantic-release/npm",
       {
         "npmPublish": false
       }
     ],
-
     [
       "@semantic-release/git",
       {
@@ -103,7 +62,6 @@
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
-
     "@semantic-release/github"
   ]
 }
