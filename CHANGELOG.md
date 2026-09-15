@@ -1,3 +1,22 @@
+# [3.3.0](https://github.com/saifAventus/release-note-tester/compare/v3.2.0...v3.3.0) (2026-09-15)
+
+
+### Features
+
+* update the spacing ([6f4552f](https://github.com/saifAventus/release-note-tester/commit/6f4552f62b7f1093d1fdb9cccb964ae4011dea55))
+* update the spacing gap ([64deb54](https://github.com/saifAventus/release-note-tester/commit/64deb54f6beb5ef400f518f75677cb35e37bc634))
+* update the spacing padding ([f172f01](https://github.com/saifAventus/release-note-tester/commit/f172f0154b6f9d2589b1188b4c5a423c8bdd19c6))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-39](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-39): update the search boarder rounden
+- [DRNT2-40](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-40): update the search boarder red
+- [DRNT2-43](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-43): update text colour to green
+- [DRNT2-44](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-44): update the text to border to red
+
 # [3.2.0](https://github.com/saifAventus/release-note-tester/compare/v3.1.0...v3.2.0) (2026-09-15)
 
 
