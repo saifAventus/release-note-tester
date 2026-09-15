@@ -1,3 +1,17 @@
+## [3.3.1](https://github.com/saifAventus/release-note-tester/compare/v3.3.0...v3.3.1) (2026-09-15)
+
+
+### Bug Fixes
+
+* [DRNT2-45](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-45) colour issue ([7f3d85f](https://github.com/saifAventus/release-note-tester/commit/7f3d85f1ac7f935f23889bfb5dcc244e4637f07a))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-45](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-45): colour issue
+
 # [3.3.0](https://github.com/saifAventus/release-note-tester/compare/v3.2.0...v3.3.0) (2026-09-15)
 
 
