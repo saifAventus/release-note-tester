@@ -41,9 +41,11 @@
         "jiraApiToken": "${SEMANTIC_RELEASE_JIRA_API_TOKEN}",
         "transitionIssues": true,
         "transitionToStatus": "Released",
-        "createVersions": true
+        "createVersions": true,
+        "versionPrefix": "release-note-tester"
       }
     ],
+
     [
       "@semantic-release/changelog",
       {
