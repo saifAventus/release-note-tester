@@ -1,3 +1,17 @@
+## [1.1.2](https://github.com/saifAventus/release-note-tester/compare/v1.1.1...v1.1.2) (2026-09-16)
+
+
+### Bug Fixes
+
+* release jason bug updaion ([348454f](https://github.com/saifAventus/release-note-tester/commit/348454f6ed0833bf1fb9671efaa59679c0f2ba34))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-70](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-70): Test Ticket #1
+
 ## [1.1.1](https://github.com/saifAventus/release-note-tester/compare/v1.1.0...v1.1.1) (2026-09-15)
 
 
