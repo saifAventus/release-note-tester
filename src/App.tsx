@@ -42,7 +42,7 @@ export const App: React.FC = () => {
         <header className="text-center space-y-5">
           <div className="inline-flex items-center gap-8 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wide uppercase shadow-inner">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Clean Architecture Demo bug</span>
+            <span>Clean Architecture  bug</span>
           </div>
 
           <div className="flex items-center justify-center gap-10">
@@ -55,7 +55,7 @@ export const App: React.FC = () => {
           </div>
 
           <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
-            A production-ready Todo management application built with decoupled logic, strict TypeScript, and Tailwind CSS.
+            A production-ready Todo management application built with decoupled logic,strict Javascript, strict TypeScript, and Tailwind CSS.
           </p>
         </header>
 
