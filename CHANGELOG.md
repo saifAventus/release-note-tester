@@ -1,3 +1,60 @@
+## [1.1.2](https://github.com/saifAventus/release-note-tester/compare/v1.1.1...v1.1.2) (2026-09-16)
+
+
+### Bug Fixes
+
+* release jason bug updaion ([348454f](https://github.com/saifAventus/release-note-tester/commit/348454f6ed0833bf1fb9671efaa59679c0f2ba34))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-70](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-70): Test Ticket #1
+
+## [1.1.1](https://github.com/saifAventus/release-note-tester/compare/v1.1.0...v1.1.1) (2026-09-15)
+
+
+### Bug Fixes
+
+* release jason issue ([2069112](https://github.com/saifAventus/release-note-tester/commit/20691128be7c83a377be60222db25cf16ce21d3e))
+* release jason issue ([80dbf8c](https://github.com/saifAventus/release-note-tester/commit/80dbf8c8a42dd5e2d469fddc10b687ca3a494aaa))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-68](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-68): relase json issue
+
+# [1.1.0](https://github.com/saifAventus/release-note-tester/compare/v1.0.0...v1.1.0) (2026-09-15)
+
+
+### Features
+
+* commit 1 ([ed54cef](https://github.com/saifAventus/release-note-tester/commit/ed54cef1192ab9a85c8f1ce87c24caa9a0084c65))
+* commit 2 ([84869dd](https://github.com/saifAventus/release-note-tester/commit/84869dd9fcf4353976a0fee3c7fce00c3f54a943))
+* commit 3 ([dc53e7f](https://github.com/saifAventus/release-note-tester/commit/dc53e7fe9ef8cb0e55f1f1912963f4fd2d3f635a))
+* commit 4 ([a405fcf](https://github.com/saifAventus/release-note-tester/commit/a405fcfaa00b3822fac2350b9b173a0bb3ea2e2c))
+* commit 5 ([3b6fb1d](https://github.com/saifAventus/release-note-tester/commit/3b6fb1d9501e2a2c8b43231fab9f77647d07e20e))
+* commit 6 ([f7d6f70](https://github.com/saifAventus/release-note-tester/commit/f7d6f7007c8c6fadeee88b69aceef78252790f26))
+* commit 7 ([705053e](https://github.com/saifAventus/release-note-tester/commit/705053e1e52fa6ec670ab62b8208a6187c4e2f08))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-58](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-58): Responsive Grid Layout Implementation
+- [DRNT2-59](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-59): Visual Consistency Audit
+- [DRNT2-60](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-60): Subtask 1 for DRNT2-59
+- [DRNT2-61](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-61): Subtask 2 for DRNT2-59
+- [DRNT2-62](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-62): Subtask 1 for DRNT2-58
+- [DRNT2-64](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-64): Subtask 1 for DRNT2-57
+- [DRNT2-65](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-65): Subtask 2 for DRNT2-57
+- [DRNT2-66](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-66): Subtask 1 for DRNT2-56
+- [DRNT2-67](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-67): Subtask 2 for DRNT2-56
+
 ## [3.3.1](https://github.com/saifAventus/release-note-tester/compare/v3.3.0...v3.3.1) (2026-09-15)
 
 
