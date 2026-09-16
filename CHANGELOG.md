@@ -1,3 +1,19 @@
+## [1.3.1](https://github.com/saifAventus/release-note-tester/compare/v1.3.0...v1.3.1) (2026-09-16)
+
+
+### Bug Fixes
+
+* [DRNT2-73](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-73) ([b528c1d](https://github.com/saifAventus/release-note-tester/commit/b528c1db38f79f985a66b6bfda3b2e52661012f4))
+* [DRNT2-74](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-74) ([60dcccd](https://github.com/saifAventus/release-note-tester/commit/60dcccd580b371774c1740b26b37eeb3b06d6939))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-73](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-73): Test Ticket #5
+- [DRNT2-74](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-74): Test Ticket #6
+
 # [1.3.0](https://github.com/saifAventus/release-note-tester/compare/v1.2.0...v1.3.0) (2026-09-16)
 
 
