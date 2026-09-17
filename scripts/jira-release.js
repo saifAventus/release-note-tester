@@ -50,8 +50,9 @@ async function jiraRequest(endpoint, options = {}) {
 
 function getTicketsFromGit() {
   try {
-    // Get commit messages from recent commits (or since last tag if available)
-    const gitLog = execSync("git log -n 50 --pretty=format:%B", { encoding: "utf-8" });
+    const previousTag = process.env.GIT_PREVIOUS_TAG;
+    const range = previousTag ? `${previousTag}..HEAD` : "HEAD~50..HEAD";
+    const gitLog = execSync(`git log ${range} --pretty=format:%B`, { encoding: "utf-8" });
     const matches = gitLog.match(TICKET_REGEX) || [];
     return [...new Set(matches)];
   } catch (err) {
