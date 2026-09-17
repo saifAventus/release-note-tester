@@ -1,3 +1,13 @@
+# [1.9.0](https://github.com/saifAventus/release-note-tester/compare/v1.8.0...v1.9.0) (2026-09-17)
+
+
+### Features
+
+* **[DRNT2-81](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-81):** change main background color to zinc-900 ([e47d7fb](https://github.com/saifAventus/release-note-tester/commit/e47d7fbd0f603820d5bf7eb84c24d68f01c839b2))
+* **[DRNT2-82](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-82):** update header text to TaskFlow Studio ([1178811](https://github.com/saifAventus/release-note-tester/commit/117881150eb77ed2ebeca0688d875461679f5d61))
+* **[DRNT2-83](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-83):** change font from Plus Jakarta Sans to Inter ([247b46d](https://github.com/saifAventus/release-note-tester/commit/247b46deded077a5163e07b164f86b57acb29c5e))
+* **[DRNT2-84](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-84):** change body background color to gray-950 ([#71](https://github.com/saifAventus/release-note-tester/issues/71)) ([229cbdf](https://github.com/saifAventus/release-note-tester/commit/229cbdfe13a0f5104457a55d761942eda85d9948))
+
 # [1.8.0](https://github.com/saifAventus/release-note-tester/compare/v1.7.0...v1.8.0) (2026-09-17)
 
 
