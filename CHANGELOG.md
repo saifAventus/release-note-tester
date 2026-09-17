@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/saifAventus/release-note-tester/compare/v1.6.0...v1.7.0) (2026-09-17)
+
+
+### Features
+
+* update the common branch ([3a08755](https://github.com/saifAventus/release-note-tester/commit/3a087550a2272fc78101dc935065c6d9bc597bbd))
+
 # [1.6.0](https://github.com/saifAventus/release-note-tester/compare/v1.5.0...v1.6.0) (2026-09-17)
 
 
