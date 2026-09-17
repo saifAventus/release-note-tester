@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/saifAventus/release-note-tester/compare/v1.4.1...v1.5.0) (2026-09-17)
+
+
+### Features
+
+* [DRNT2-76](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-76) update badge and header spacing styles ([177acce](https://github.com/saifAventus/release-note-tester/commit/177accebb570e91e3077abc419738009ba860a39))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-76](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-76): Feature Two
+
 ## [1.4.1](https://github.com/saifAventus/release-note-tester/compare/v1.4.0...v1.4.1) (2026-09-17)
 
 
