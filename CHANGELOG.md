@@ -11,6 +11,21 @@
 * add function to find previous tag ([e97804c](https://github.com/saifAventus/release-note-tester/commit/e97804c2d42bc29888d167aa9dba34d2bf0df3f5))
 * [DRNT2-93](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-93) ([68eb67f](https://github.com/saifAventus/release-note-tester/commit/68eb67fff8211417c2d6cbd3338b3c830cc0c792))
 * [DRNT2-94](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-94) ([e5665e0](https://github.com/saifAventus/release-note-tester/commit/e5665e0f0c9c00b8d528e9ba7a2fcb59f637fd6d))
+* [DRNT2-95](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-95) ([98e05c0](https://github.com/saifAventus/release-note-tester/commit/98e05c0a7bbfb963c68cee1f72822c0b8b84fb61))
+
+# [1.12.0](https://github.com/saifAventus/release-note-tester/compare/v1.11.0...v1.12.0) (2026-09-17)
+
+
+### Bug Fixes
+
+* [DRNT2-92](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-92) test tickt [#1](https://github.com/saifAventus/release-note-tester/issues/1) ([8104e89](https://github.com/saifAventus/release-note-tester/commit/8104e89da663d439581916b4ae5de3d8e2c92f2b))
+
+
+### Features
+
+* add function to find previous tag ([e97804c](https://github.com/saifAventus/release-note-tester/commit/e97804c2d42bc29888d167aa9dba34d2bf0df3f5))
+* [DRNT2-93](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-93) ([68eb67f](https://github.com/saifAventus/release-note-tester/commit/68eb67fff8211417c2d6cbd3338b3c830cc0c792))
+* [DRNT2-94](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-94) ([e5665e0](https://github.com/saifAventus/release-note-tester/commit/e5665e0f0c9c00b8d528e9ba7a2fcb59f637fd6d))
 
 # [1.11.0](https://github.com/saifAventus/release-note-tester/compare/v1.10.0...v1.11.0) (2026-09-17)
 
