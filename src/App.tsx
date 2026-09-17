@@ -30,7 +30,7 @@ export const App: React.FC = () => {
   } = useTodos();
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative overflow-hidden py-2 px-4 sm:px-6 lg:px-7">
+    <main className="min-h-screen bg-zinc-900 text-slate-100 flex flex-col relative overflow-hidden py-2 px-4 sm:px-6 lg:px-7">
       {/* Decorative ambient background glows */}
       <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-[40%] right-[10%] w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -50,7 +50,7 @@ export const App: React.FC = () => {
               <CheckSquare2 className="w-6 h-6" />
             </div>
             <h1 className="text-xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
-              TaskFlow Pro
+              TaskFlow Studio
             </h1>
           </div>
 
