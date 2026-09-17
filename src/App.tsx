@@ -50,7 +50,7 @@ export const App: React.FC = () => {
               <CheckSquare2 className="w-6 h-6" />
             </div>
             <h1 className="text-xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
-              TaskFlow Pro
+              TaskFlow Studio
             </h1>
           </div>
 
