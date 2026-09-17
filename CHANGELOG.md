@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/saifAventus/release-note-tester/compare/v1.14.0...v1.15.0) (2026-09-17)
+
+
+### Features
+
+* [DRNT2-97](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-97) ([b89b1f5](https://github.com/saifAventus/release-note-tester/commit/b89b1f53c407d61b789e6ca665f4f10285c67b68))
+
 # [1.13.0](https://github.com/saifAventus/release-note-tester/compare/v1.12.0...v1.13.0) (2026-09-17)
 
 
