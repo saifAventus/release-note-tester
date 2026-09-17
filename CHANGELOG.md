@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/saifAventus/release-note-tester/compare/v1.9.0...v1.10.0) (2026-09-17)
+
+
+### Features
+
+* **[DRNT2-88](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-88), [DRNT2-89](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-89):** update header title to Feature 5 and change background color to teal-800 ([4e98486](https://github.com/saifAventus/release-note-tester/commit/4e9848618224ba7cc536f33aaa2526fd2f6eaf40))
+
 # [1.9.0](https://github.com/saifAventus/release-note-tester/compare/v1.8.0...v1.9.0) (2026-09-17)
 
 
