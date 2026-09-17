@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/saifAventus/release-note-tester/compare/v1.17.0...v1.18.0) (2026-09-17)
+
+
+### Features
+
+* update test ([b5875e9](https://github.com/saifAventus/release-note-tester/commit/b5875e91de168da2fe57142fb98b0042099242e0))
+
 # [1.17.0](https://github.com/saifAventus/release-note-tester/compare/v1.16.0...v1.17.0) (2026-09-17)
 
 
