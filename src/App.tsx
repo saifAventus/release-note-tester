@@ -42,7 +42,7 @@ export const App: React.FC = () => {
         <header className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wide uppercase shadow-inner">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Clean Architecture  bug</span>
+            <span>Clean Architecture Studio</span>
           </div>
 
           <div className="flex items-center justify-center gap-3">
