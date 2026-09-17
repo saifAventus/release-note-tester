@@ -55,7 +55,7 @@ export const App: React.FC = () => {
           </div>
 
           <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
-            A production-ready Todo management application built with decoupled logic, strict TypeScript, and Tailwind CSS.
+            A production-ready Todo's management application built with decoupled logic, test 6 strict TypeScript, and Tailwind CSS.
           </p>
         </header>
 
