@@ -1,3 +1,17 @@
+## [1.4.1](https://github.com/saifAventus/release-note-tester/compare/v1.4.0...v1.4.1) (2026-09-17)
+
+
+### Reverts
+
+* Revert "feat: [DRNT2-75](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-75) update description text" ([79e1d61](https://github.com/saifAventus/release-note-tester/commit/79e1d6153abbfeefffee1251272a2c7501311e42))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-75](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-75): Feature One
+
 # [1.4.0](https://github.com/saifAventus/release-note-tester/compare/v1.3.1...v1.4.0) (2026-09-17)
 
 
