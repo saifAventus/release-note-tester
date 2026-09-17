@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckSquare2, Sparkles, Code2, ShieldCheck, Layers } from 'lucide-react';
+import { CheckSquare2, Sparkles, Code2, ShieldCheck, Layers, AlertCircle } from 'lucide-react';
 import { useTodos } from './hooks/useTodos';
 import { TodoStats } from './components/todo/TodoStats';
 import { TodoInput } from './components/todo/TodoInput';
@@ -30,7 +30,7 @@ export const App: React.FC = () => {
   } = useTodos();
 
   return (
-    <main className="min-h-screen bg-zinc-900 text-slate-100 flex flex-col relative overflow-hidden py-2 px-4 sm:px-6 lg:px-7">
+    <main className="min-h-screen bg-teal-800 text-slate-100 flex flex-col relative overflow-hidden py-2 px-4 sm:px-6 lg:px-7">
       {/* Decorative ambient background glows */}
       <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-[40%] right-[10%] w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -50,7 +50,7 @@ export const App: React.FC = () => {
               <CheckSquare2 className="w-6 h-6" />
             </div>
             <h1 className="text-xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
-              TaskFlow Studio
+              Feature 5
             </h1>
           </div>
 
@@ -129,8 +129,9 @@ export const App: React.FC = () => {
           </div>
 
           <p className="text-xs text-slate-500">
-            Tip: Double-click any task to edit inline &bull; Press <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-300 font-mono">Enter</kbd> to save &bull; <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-300 font-mono">Esc</kbd> to cancel
+            Tip: Double-click any task to edit inline • Press <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-300 font-mono">Enter</kbd> to save • Press <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-300 font-mono">Esc</kbd> to cancel – demo for DRNT2-87
           </p>
+            <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs mb-1"><AlertCircle className="w-4 h-4" /> <span>DRNT2-85 placeholder</span></div>
         </footer>
       </div>
     </main>
