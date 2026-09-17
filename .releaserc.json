@@ -33,16 +33,9 @@
       }
     ],
     [
-      "@open-turo/semantic-release-jira",
-
+      "@semantic-release/exec",
       {
-        "jiraServerUrl": "${SEMANTIC_RELEASE_JIRA_SERVER_URL}",
-        "jiraUsername": "${SEMANTIC_RELEASE_JIRA_USERNAME}",
-        "jiraApiToken": "${SEMANTIC_RELEASE_JIRA_API_TOKEN}",
-        "transitionIssues": true,
-        "transitionToStatus": "Released",
-        "createVersions": true,
-        "versionPrefix": "release-note-tester"
+        "publishCmd": "node ./scripts/jira-release.js \"${nextRelease.version}\""
       }
     ],
 
