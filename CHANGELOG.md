@@ -1,3 +1,21 @@
+# [1.6.0](https://github.com/saifAventus/release-note-tester/compare/v1.5.0...v1.6.0) (2026-09-17)
+
+
+### Features
+
+* [DRNT2-75](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-75) update description text ([4038523](https://github.com/saifAventus/release-note-tester/commit/4038523f92ff66b9a22f4f18d0b379f565920c28))
+* [DRNT2-77](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-77) update project title to TaskFlow Pro ([5470b7e](https://github.com/saifAventus/release-note-tester/commit/5470b7e531de9a8fccefec30df2308c72f67814f))
+* [DRNT2-78](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-78) update badge label to Clean Architecture Studio ([1bb1881](https://github.com/saifAventus/release-note-tester/commit/1bb1881f5adb4399fb725740eeae9c0f6b77f80f))
+
+
+## Jira Issues
+
+### DRNT2
+
+- [DRNT2-75](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-75): Feature One
+- [DRNT2-77](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-77): Feature Three
+- [DRNT2-78](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-78): Feature Four
+
 # [1.5.0](https://github.com/saifAventus/release-note-tester/compare/v1.4.1...v1.5.0) (2026-09-17)
 
 
