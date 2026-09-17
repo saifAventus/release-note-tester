@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/saifAventus/release-note-tester/compare/v1.7.0...v1.8.0) (2026-09-17)
+
+
+### Features
+
+* [DRNT2-79](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-79) change header theme color ([25c106a](https://github.com/saifAventus/release-note-tester/commit/25c106a10ec2fdf5c3fca4983d710e2aeecc7d6a))
+* [DRNT2-80](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-80) update header description text ([5f22998](https://github.com/saifAventus/release-note-tester/commit/5f22998bc9e7dd3b301b807c8c8cfb7e74bd0ca5))
+
 # [1.7.0](https://github.com/saifAventus/release-note-tester/compare/v1.6.0...v1.7.0) (2026-09-17)
 
 
