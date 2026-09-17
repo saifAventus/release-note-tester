@@ -54,7 +54,7 @@ function getPreviousTag() {
     encoding: "utf-8",
   });
 
-  const topTag = gitlog.trim().split("\n")[0];
+  const topTag = gitlog.trim().split("\n")[1];
   return topTag;
 }
 function getTicketsFromGit() {
