@@ -1,7 +1,9 @@
 # Release Notes
 
 Current Version: v1.22.1
-Expected Release Version: (no releasable changes)
+Expected Release Version: v1.22.2
 Status: QA
 
-_No releasable conventional commits found since the current version._
+## Bug Fixes
+
+- Parse Jira RC version from RELEASE_NOTES_PREVIEW.md reliably
