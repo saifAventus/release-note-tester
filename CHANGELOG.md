@@ -1,3 +1,10 @@
+## [1.21.2](https://github.com/saifAventus/release-note-tester/compare/v1.21.1...v1.21.2) (2026-09-21)
+
+
+### Bug Fixes
+
+* **[DRNT2-109](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-109):** repair broken jira-release.js syntax ([e3585ae](https://github.com/saifAventus/release-note-tester/commit/e3585ae13d4a411a9c6ec75c1a789d05cf276f98))
+
 ## [1.21.1](https://github.com/saifAventus/release-note-tester/compare/v1.21.0...v1.21.1) (2026-09-21)
 
 
