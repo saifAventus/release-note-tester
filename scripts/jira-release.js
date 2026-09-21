@@ -1,5 +1,19 @@
 #!/usr/bin/env node
 
+/**
+ * Official Jira release integration (runs only from Semantic Release publishCmd).
+ *
+ * Flow:
+ * 1. Create Jira version as UNRELEASED
+ * 2. Find tickets from git commits since previous tag
+ * 3. Attach fixVersion to each ticket
+ * 4. Transition tickets to Released/Done when possible
+ * 5. Mark Jira version as released
+ *
+ * Creating the version as already-released often blocks adding issues in Jira,
+ * which is why tickets were missing the new release.
+ */
+
 import { execSync } from "node:child_process";
 
 const JIRA_URL = (
@@ -42,12 +56,13 @@ async function jiraRequest(endpoint, options = {}) {
     );
   }
 
-  // Some endpoints (e.g. 204 No Content for transitions/updates) don't return JSON
   if (response.status === 204) {
     return null;
   }
 
-  return response.json();
+  const text = await response.text();
+  if (!text) return null;
+  return JSON.parse(text);
 }
 function getPreviousTag() {
   // publishCmd runs after semantic-release creates the new tag, so
@@ -60,11 +75,14 @@ function getPreviousTag() {
   const topTag = gitlog.trim().split("\n")[1];
   return topTag;
 }
-function getTicketsFromGit() {
+
+function getTicketsFromGit(currentVersion, lastReleaseTagArg) {
   try {
-    const previousTag = getPreviousTag();
-    console.log(`previousTag: ${previousTag}`);
+    const previousTag = getPreviousTag(currentVersion, lastReleaseTagArg);
+    console.log(`previousTag: ${previousTag || "(none)"}`);
     const range = previousTag ? `${previousTag}..HEAD` : "HEAD~50..HEAD";
+    console.log(`git range: ${range}`);
+
     const gitLog = execSync(`git log ${range} --pretty=format:%B`, {
       encoding: "utf-8",
     });
@@ -76,8 +94,103 @@ function getTicketsFromGit() {
   }
 }
 
+async function ensureVersionUnreleased(targetVersion, versionName) {
+  if (targetVersion.released) {
+    console.log(
+      `🔓 Re-opening version "${versionName}" so issues can be attached...`,
+    );
+    await jiraRequest(`/rest/api/3/version/${targetVersion.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        released: false,
+        releaseDate: null,
+      }),
+    });
+    targetVersion.released = false;
+  }
+  return targetVersion;
+}
+
+async function markVersionReleased(targetVersion, versionName) {
+  const today = new Date().toISOString().split("T")[0];
+  console.log(`🏷️  Marking version "${versionName}" as released...`);
+  const updated = await jiraRequest(`/rest/api/3/version/${targetVersion.id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      released: true,
+      releaseDate: today,
+    }),
+  });
+  console.log(`✅ Version "${versionName}" marked released (${today})`);
+  return updated || targetVersion;
+}
+
+async function attachFixVersion(ticketKey, targetVersion, versionName) {
+  const issue = await jiraRequest(
+    `/rest/api/3/issue/${ticketKey}?fields=fixVersions,status`,
+  );
+  const existingFixVersions = issue.fields?.fixVersions || [];
+  const hasVersion = existingFixVersions.some(
+    (v) => v.id === targetVersion.id || v.name === versionName,
+  );
+
+  if (!hasVersion) {
+    console.log(`  ➕ Adding fixVersion "${versionName}" to ${ticketKey}...`);
+    await jiraRequest(`/rest/api/3/issue/${ticketKey}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        update: {
+          fixVersions: [{ add: { id: targetVersion.id } }],
+        },
+      }),
+    });
+    console.log(`  ✅ fixVersion attached to ${ticketKey}`);
+  } else {
+    console.log(`  ℹ️  ${ticketKey} already has fixVersion "${versionName}"`);
+  }
+
+  return issue;
+}
+
+async function transitionIssue(ticketKey, issue) {
+  const currentStatus = issue.fields?.status?.name;
+  if (currentStatus === "Released" || currentStatus === "Done") {
+    console.log(`  ℹ️  ${ticketKey} is already in "${currentStatus}" status.`);
+    return;
+  }
+
+  const { transitions } = await jiraRequest(
+    `/rest/api/3/issue/${ticketKey}/transitions`,
+  );
+  const targetTransition =
+    transitions.find((t) => t.to?.name?.toLowerCase() === "released") ||
+    transitions.find((t) => t.to?.name?.toLowerCase() === "done");
+
+  if (!targetTransition) {
+    console.log(
+      `  ⚠️  No transition to "Released" or "Done" for ${ticketKey}. Current: "${currentStatus}"`,
+    );
+    return;
+  }
+
+  console.log(
+    `  🚀 Transitioning ${ticketKey} from "${currentStatus}" to "${targetTransition.to.name}"...`,
+  );
+  await jiraRequest(`/rest/api/3/issue/${ticketKey}/transitions`, {
+    method: "POST",
+    body: JSON.stringify({
+      transition: { id: targetTransition.id },
+    }),
+  });
+  console.log(
+    `  ✅ ${ticketKey} transitioned to "${targetTransition.to.name}"`,
+  );
+}
+
 async function run() {
   const rawVersion = process.argv[2];
+  const lastReleaseTagArg = process.argv[3];
+
   if (!rawVersion) {
     console.error(
       "❌ Error: Release version argument is required (e.g. node jira-release.js 1.7.0)",
@@ -100,7 +213,6 @@ async function run() {
   }
 
   try {
-    // 1. Fetch Project Details
     console.log(
       `🔍 [Jira Release] Fetching project details for ${PROJECT_KEY}...`,
     );
@@ -109,7 +221,6 @@ async function run() {
       `✅ [Jira Release] Connected to project: ${project.name} (ID: ${project.id})`,
     );
 
-    // 2. Check or Create Version
     console.log(
       `🔍 [Jira Release] Checking if version "${versionName}" exists...`,
     );
@@ -122,16 +233,19 @@ async function run() {
       console.log(
         `ℹ️  [Jira Release] Version "${versionName}" already exists (ID: ${targetVersion.id}).`,
       );
+      // Ensure it is open before attaching issues
+      targetVersion = await ensureVersionUnreleased(targetVersion, versionName);
     } else {
-      console.log(`✨ [Jira Release] Creating new version "${versionName}"...`);
-      const today = new Date().toISOString().split("T")[0];
+      // IMPORTANT: create UNRELEASED first so issues can be added
+      console.log(
+        `✨ [Jira Release] Creating new version "${versionName}" (unreleased)...`,
+      );
       targetVersion = await jiraRequest("/rest/api/3/version", {
         method: "POST",
         body: JSON.stringify({
           name: versionName,
           projectId: Number(project.id),
-          released: true,
-          releaseDate: today,
+          released: false,
           description: `Automated release ${versionName}`,
         }),
       });
@@ -140,8 +254,7 @@ async function run() {
       );
     }
 
-    // 3. Extract Tickets and Associate with Version
-    const tickets = getTicketsFromGit();
+    const tickets = getTicketsFromGit(cleanVersion, lastReleaseTagArg);
     console.log(
       `📋 [Jira Release] Found ${tickets.length} ticket(s) in release commits: ${tickets.join(", ") || "(none)"}`,
     );
@@ -149,69 +262,12 @@ async function run() {
     for (const ticketKey of tickets) {
       try {
         console.log(`\n🔄 [Jira Release] Processing ticket ${ticketKey}...`);
-
-        // Get issue details to read existing fixVersions
-        const issue = await jiraRequest(
-          `/rest/api/3/issue/${ticketKey}?fields=fixVersions,status`,
+        const issue = await attachFixVersion(
+          ticketKey,
+          targetVersion,
+          versionName,
         );
-        const existingFixVersions = issue.fields?.fixVersions || [];
-
-        // Check if version is already attached
-        const hasVersion = existingFixVersions.some(
-          (v) => v.id === targetVersion.id || v.name === versionName,
-        );
-        if (!hasVersion) {
-          console.log(
-            `  ➕ Adding fixVersion "${versionName}" to ${ticketKey}...`,
-          );
-          await jiraRequest(`/rest/api/3/issue/${ticketKey}`, {
-            method: "PUT",
-            body: JSON.stringify({
-              update: {
-                fixVersions: [{ add: { id: targetVersion.id } }],
-              },
-            }),
-          });
-          console.log(`  ✅ fixVersion attached to ${ticketKey}`);
-        } else {
-          console.log(
-            `  ℹ️  ${ticketKey} already has fixVersion "${versionName}"`,
-          );
-        }
-
-        // Check and transition status to "Released" (or "Done")
-        const currentStatus = issue.fields?.status?.name;
-        if (currentStatus !== "Released" && currentStatus !== "Done") {
-          const { transitions } = await jiraRequest(
-            `/rest/api/3/issue/${ticketKey}/transitions`,
-          );
-          const targetTransition =
-            transitions.find((t) => t.to?.name?.toLowerCase() === "released") ||
-            transitions.find((t) => t.to?.name?.toLowerCase() === "done");
-
-          if (targetTransition) {
-            console.log(
-              `  🚀 Transitioning ${ticketKey} from "${currentStatus}" to "${targetTransition.to.name}"...`,
-            );
-            await jiraRequest(`/rest/api/3/issue/${ticketKey}/transitions`, {
-              method: "POST",
-              body: JSON.stringify({
-                transition: { id: targetTransition.id },
-              }),
-            });
-            console.log(
-              `  ✅ ${ticketKey} transitioned to "${targetTransition.to.name}"`,
-            );
-          } else {
-            console.log(
-              `  ⚠️  No valid transition to "Released" or "Done" found for ${ticketKey}. Current status: "${currentStatus}"`,
-            );
-          }
-        } else {
-          console.log(
-            `  ℹ️  ${ticketKey} is already in "${currentStatus}" status.`,
-          );
-        }
+        await transitionIssue(ticketKey, issue);
       } catch (err) {
         console.error(
           `  ❌ Failed processing ticket ${ticketKey}:`,
@@ -219,6 +275,9 @@ async function run() {
         );
       }
     }
+
+    // Mark released AFTER tickets are attached
+    await markVersionReleased(targetVersion, versionName);
 
     console.log(
       `\n🏁 [Jira Release] Release ${versionName} completed successfully!\n`,

@@ -1,3 +1,28 @@
+## [1.19.1](https://github.com/saifAventus/release-note-tester/compare/v1.19.0...v1.19.1) (2026-09-21)
+
+
+### Bug Fixes
+
+* **[DRNT2-109](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-109):** attach Jira fixVersions before marking release ([ff58d2e](https://github.com/saifAventus/release-note-tester/commit/ff58d2e2e6a89209aa412651e17361260fffeca8))
+
+# [1.19.0](https://github.com/saifAventus/release-note-tester/compare/v1.18.0...v1.19.0) (2026-09-21)
+
+
+### Bug Fixes
+
+* commit release notes preview back to release branch ([e9b9f3c](https://github.com/saifAventus/release-note-tester/commit/e9b9f3c13345c350fe494b045cd03bcb6bf6dc76))
+* run semantic-release on dev branch ([6ba6a0b](https://github.com/saifAventus/release-note-tester/commit/6ba6a0baaef7981c9e77f1d93b512c0b4e5e8f5e))
+
+
+### Features
+
+* add release-branch release notes preview flow ([cc7e827](https://github.com/saifAventus/release-note-tester/commit/cc7e8274a1fea6c61516293a643b2cebbfccc4c4))
+* [DRNT2-100](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-100) updated app 1 ([5784a44](https://github.com/saifAventus/release-note-tester/commit/5784a44662aee59ca2fe09e0ae21f3b93c2870cb))
+* [DRNT2-108](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-108) updae the colour ([a8de11c](https://github.com/saifAventus/release-note-tester/commit/a8de11c2997198f4d07f6f9d544ea8586fe6d118))
+* **[DRNT2-108](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-108):** test release notes filter chips ([e56a68c](https://github.com/saifAventus/release-note-tester/commit/e56a68c451dc2c455f58fd879200fb96988292fd))
+* **[DRNT2-109](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-109):** test SMS fallback verification workflow ([237b534](https://github.com/saifAventus/release-note-tester/commit/237b534f9a2d13d3dea56dd88d87e1eb92a83094))
+* **[DRNT2-11](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-11):** Design role permission matrix and database schema ([486493f](https://github.com/saifAventus/release-note-tester/commit/486493f5812e70c5eceffbc6fd26abf481be0699))
+
 # [1.18.0](https://github.com/saifAventus/release-note-tester/compare/v1.17.0...v1.18.0) (2026-09-17)
 
 
