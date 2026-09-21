@@ -1,3 +1,22 @@
+# [1.21.0](https://github.com/saifAventus/release-note-tester/compare/v1.20.0...v1.21.0) (2026-09-21)
+
+
+### Bug Fixes
+
+* commit release notes preview back to release branch ([10b9fcc](https://github.com/saifAventus/release-note-tester/commit/10b9fcc003e65288e1e2311bb770218bf64fc302))
+
+
+### Features
+
+* add release-branch release notes preview flow ([6f899e7](https://github.com/saifAventus/release-note-tester/commit/6f899e74cdb63a09265f680f2b314b3753772e5e))
+* [DRNT2-100](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-100) updated app 1 ([1be5ed6](https://github.com/saifAventus/release-note-tester/commit/1be5ed6284488f563b1320b98366f22640c866fc))
+* [DRNT2-108](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-108) updae the colour ([553e98e](https://github.com/saifAventus/release-note-tester/commit/553e98e354ad2760aecbb0bcec207b6f2d85ba0d))
+* **[DRNT2-108](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-108):** test release notes filter chips ([06b9007](https://github.com/saifAventus/release-note-tester/commit/06b90072d4be5651ed3f2ec6d6d6b720a50beaf6))
+* **[DRNT2-109](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-109):** test SMS fallback verification workflow ([9b83d3a](https://github.com/saifAventus/release-note-tester/commit/9b83d3ad0ed9b8edc0cb26e92f1214ac61c6c93a))
+* **[DRNT2-112](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-112):** Set up WebSocket infrastructure for live event delivery ([58c5580](https://github.com/saifAventus/release-note-tester/commit/58c5580296063d2f63ea2e9a3377c9c8aa5a57fd))
+* **[DRNT2-113](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-113):** Build notification bell dropdown and unread badge UI ([0dc54c1](https://github.com/saifAventus/release-note-tester/commit/0dc54c1345beea5f22ebc44b0d0438be7308762c))
+* **[DRNT2-11](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-11):** Design role permission matrix and database schema ([9dfb467](https://github.com/saifAventus/release-note-tester/commit/9dfb4675ac6fd95816af02c2222184a20fe9d601))
+
 # [1.20.0](https://github.com/saifAventus/release-note-tester/compare/v1.19.1...v1.20.0) (2026-09-21)
 
 
