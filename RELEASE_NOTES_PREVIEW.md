@@ -7,3 +7,4 @@ Status: QA
 ## Bug Fixes
 
 - DRNT2-121 - FONTT ISSUE
+- Parse Jira RC version from RELEASE_NOTES_PREVIEW.md reliably
