@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/saifAventus/release-note-tester/compare/v1.19.0...v1.19.1) (2026-09-21)
+
+
+### Bug Fixes
+
+* **[DRNT2-109](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-109):** attach Jira fixVersions before marking release ([ff58d2e](https://github.com/saifAventus/release-note-tester/commit/ff58d2e2e6a89209aa412651e17361260fffeca8))
+
 # [1.19.0](https://github.com/saifAventus/release-note-tester/compare/v1.18.0...v1.19.0) (2026-09-21)
 
 
