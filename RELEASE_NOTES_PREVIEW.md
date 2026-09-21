@@ -10,3 +10,7 @@ Status: QA
 - Add release-branch release notes preview flow
 - DRNT2-108 - Updae the colour
 - DRNT2-109 - Test SMS fallback verification workflow
+
+## Bug Fixes
+
+- Commit release notes preview back to release branch
