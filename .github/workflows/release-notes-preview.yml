@@ -9,6 +9,10 @@ jobs:
   preview:
     name: Generate Release Notes Preview
     runs-on: ubuntu-latest
+    # Avoid re-running when this workflow pushes its own preview commit.
+    # Do NOT put [skip ci] in that commit — it also skips Release Pipeline
+    # when the release branch is later merged into dev.
+    if: github.actor != 'github-actions[bot]'
 
     permissions:
       contents: write
@@ -18,7 +22,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # Needed so the bot can push the updated preview file back
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js Environment
@@ -52,6 +55,5 @@ jobs:
             exit 0
           fi
 
-          # [skip ci] prevents an infinite preview-workflow loop
-          git commit -m "chore: update RELEASE_NOTES_PREVIEW.md [skip ci]"
+          git commit -m "chore: update RELEASE_NOTES_PREVIEW.md"
           git push
