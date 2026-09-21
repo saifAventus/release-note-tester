@@ -270,6 +270,24 @@ function readPreviewNotes() {
   return notes;
 }
 
+/**
+ * Parse "Expected Release Version: v1.22.2" from RELEASE_NOTES_PREVIEW.md.
+ * Handles CRLF and optional "v" prefix.
+ */
+function parseExpectedVersionFromNotes(notes) {
+  const match = notes.match(
+    /Expected\s+Release\s+Version:\s*v?(\d+\.\d+\.\d+)/i,
+  );
+  if (!match) {
+    throw new Error(
+      "Could not parse Expected Release Version from RELEASE_NOTES_PREVIEW.md.\n" +
+        "Expected a line like: Expected Release Version: v1.22.2\n\n" +
+        `File contents:\n${notes}`,
+    );
+  }
+  return match[1];
+}
+
 function buildPreviewDescription(baseVersion, rcName, notes) {
   return [
     "Release Candidate",
@@ -318,7 +336,14 @@ function getNextRcNumber(versions, baseVersion) {
   return max + 1;
 }
 
-async function runPreview(cleanVersion) {
+async function runPreview(versionArg) {
+  requireCredentials();
+  const notes = readPreviewNotes();
+  const cleanVersion = (versionArg || parseExpectedVersionFromNotes(notes)).replace(
+    /^v/,
+    "",
+  );
+
   console.log(`
 ========================================
 JIRA RELEASE
@@ -328,8 +353,6 @@ Mode: preview
 Base version: ${cleanVersion}
 `);
 
-  requireCredentials();
-  const notes = readPreviewNotes();
   console.log(`Reading:\n${PREVIEW_NOTES_FILE}\n`);
 
   const project = await jiraRequest(`/rest/api/3/project/${PROJECT_KEY}`);
@@ -518,20 +541,21 @@ async function run() {
     process.exit(1);
   }
 
-  if (!version) {
-    console.error(
-      "❌ Error: Release version argument is required (e.g. node jira-release.js 1.22.1 --preview)",
-    );
-    process.exit(1);
-  }
-
-  const cleanVersion = version.replace(/^v/, "");
-
   try {
     if (mode === "preview") {
-      await runPreview(cleanVersion);
+      // Version arg optional for preview — falls back to RELEASE_NOTES_PREVIEW.md
+      await runPreview(version);
       return;
     }
+
+    if (!version) {
+      console.error(
+        "❌ Error: Release version argument is required (e.g. node jira-release.js 1.22.1 --production)",
+      );
+      process.exit(1);
+    }
+
+    const cleanVersion = version.replace(/^v/, "");
 
     if (mode === "production") {
       await runProduction(cleanVersion);
