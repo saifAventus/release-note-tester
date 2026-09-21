@@ -1,3 +1,15 @@
+# [1.20.0](https://github.com/saifAventus/release-note-tester/compare/v1.19.1...v1.20.0) (2026-09-21)
+
+
+### Bug Fixes
+
+* align semantic-release branch config to dev ([6a00be8](https://github.com/saifAventus/release-note-tester/commit/6a00be8ff14a33c94683f2ff5b0bd997c6583497))
+
+
+### Features
+
+* update the home ([ae0fe29](https://github.com/saifAventus/release-note-tester/commit/ae0fe29366fb905ece31272eb54a067284c15a99))
+
 ## [1.19.1](https://github.com/saifAventus/release-note-tester/compare/v1.19.0...v1.19.1) (2026-09-21)
 
 
