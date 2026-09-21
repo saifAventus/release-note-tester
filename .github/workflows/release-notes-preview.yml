@@ -1,0 +1,39 @@
+name: Release Notes Preview
+
+on:
+  push:
+    branches:
+      - "release/**"
+
+jobs:
+  preview:
+    name: Generate Release Notes Preview
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Release Notes Preview
+        run: node ./scripts/release-notes-preview.js
+
+      - name: Upload Release Notes Preview Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes-preview
+          path: RELEASE_NOTES_PREVIEW.md
+          if-no-files-found: error

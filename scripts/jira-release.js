@@ -50,6 +50,9 @@ async function jiraRequest(endpoint, options = {}) {
   return response.json();
 }
 function getPreviousTag() {
+  // publishCmd runs after semantic-release creates the new tag, so
+  // index [0] is the just-created release tag and [1] is the prior tag.
+  // Using [1] keeps the commit range as previousTag..HEAD for this release.
   const gitlog = execSync("git tag --sort=-version:refname", {
     encoding: "utf-8",
   });
