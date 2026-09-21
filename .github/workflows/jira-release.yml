@@ -22,6 +22,20 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      # Guard: merging release/* sometimes overwrites this back to "main".
+      # If branches != dev, semantic-release skips publish → no tag and no Jira version.
+      - name: Verify Semantic Release branch config
+        run: |
+          BRANCHES=$(node -e "console.log(JSON.stringify(JSON.parse(require('fs').readFileSync('.releaserc.json','utf8')).branches))")
+          echo "Configured semantic-release branches: $BRANCHES"
+          echo "$BRANCHES" | grep -q '"dev"' || {
+            echo "::error::.releaserc.json must include \"dev\" because this workflow runs on dev."
+            echo "A release-branch merge likely flipped it to \"main\"."
+            echo "Fix: set .releaserc.json branches to [\"dev\"] and push again."
+            echo "Otherwise Semantic Release skips publish → no Git tag and no Jira version."
+            exit 1
+          }
+
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
@@ -41,4 +55,3 @@ jobs:
           SEMANTIC_RELEASE_JIRA_SERVER_URL: ${{ secrets.JIRA_SERVER_URL }}
           SEMANTIC_RELEASE_JIRA_USERNAME: ${{ secrets.JIRA_USER_EMAIL }}
           SEMANTIC_RELEASE_JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-
