@@ -64,55 +64,16 @@ async function jiraRequest(endpoint, options = {}) {
   if (!text) return null;
   return JSON.parse(text);
 }
+function getPreviousTag() {
+  // publishCmd runs after semantic-release creates the new tag, so
+  // index [0] is the just-created release tag and [1] is the prior tag.
+  // Using [1] keeps the commit range as previousTag..HEAD for this release.
+  const gitlog = execSync("git tag --sort=-version:refname", {
+    encoding: "utf-8",
+  });
 
-function listVersionTags() {
-  try {
-    return execSync("git tag --sort=-version:refname", { encoding: "utf-8" })
-      .trim()
-      .split("\n")
-      .map((t) => t.trim())
-      .filter(Boolean)
-      .filter((t) => /^v?\d+\.\d+\.\d+/.test(t));
-  } catch {
-    return [];
-  }
-}
-
-/**
- * Resolve the previous official tag to build the commit range.
- * Prefer the value passed by Semantic Release (${lastRelease.gitTag}).
- */
-function getPreviousTag(currentVersion, lastReleaseTagArg) {
-  if (lastReleaseTagArg && lastReleaseTagArg !== "undefined" && lastReleaseTagArg !== "null") {
-    const normalized = lastReleaseTagArg.startsWith("v")
-      ? lastReleaseTagArg
-      : `v${lastReleaseTagArg}`;
-    console.log(`Using lastRelease tag from Semantic Release: ${normalized}`);
-    return normalized;
-  }
-
-  const tags = listVersionTags();
-  if (!tags.length) return null;
-
-  const currentTag = currentVersion
-    ? currentVersion.startsWith("v")
-      ? currentVersion
-      : `v${currentVersion}`
-    : null;
-
-  // If the newly created release tag is already present, previous is index 1
-  if (currentTag && tags[0] === currentTag) {
-    console.log(
-      `Latest tag is current release ${currentTag}; using previous tag ${tags[1] || "(none)"}`,
-    );
-    return tags[1] || null;
-  }
-
-  // New tag not visible yet — latest tag is the previous release
-  console.log(
-    `Current release tag not listed yet; using latest tag as previous: ${tags[0]}`,
-  );
-  return tags[0];
+  const topTag = gitlog.trim().split("\n")[1];
+  return topTag;
 }
 
 function getTicketsFromGit(currentVersion, lastReleaseTagArg) {
@@ -221,7 +182,9 @@ async function transitionIssue(ticketKey, issue) {
       transition: { id: targetTransition.id },
     }),
   });
-  console.log(`  ✅ ${ticketKey} transitioned to "${targetTransition.to.name}"`);
+  console.log(
+    `  ✅ ${ticketKey} transitioned to "${targetTransition.to.name}"`,
+  );
 }
 
 async function run() {

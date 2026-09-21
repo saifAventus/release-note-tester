@@ -1,7 +1,7 @@
 # Release Notes
 
-Current Version: v1.18.0
-Expected Release Version: v1.19.0
+Current Version: v1.19.1
+Expected Release Version: v1.20.0
 Status: QA
 
 ## Features
@@ -11,6 +11,7 @@ Status: QA
 - DRNT2-108 - Updae the colour
 - DRNT2-109 - Test SMS fallback verification workflow
 - DRNT2-11 - Design role permission matrix and database schema
+- DRNT2-112 - Set up WebSocket infrastructure for live event delivery
 
 ## Bug Fixes
 
