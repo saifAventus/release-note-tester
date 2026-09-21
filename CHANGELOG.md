@@ -1,3 +1,17 @@
+# [1.22.0](https://github.com/saifAventus/release-note-tester/compare/v1.21.2...v1.22.0) (2026-09-21)
+
+
+### Bug Fixes
+
+* **[DRNT2-120](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-120):** colour issue ([339393c](https://github.com/saifAventus/release-note-tester/commit/339393cf7aa204940a1736b5b78c6e804a5f8ea2))
+* **[DRNT2-120](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-120):** trigger release after skipped merge ([a46a7f3](https://github.com/saifAventus/release-note-tester/commit/a46a7f386778b9490ff7131d5e1c151e4160d90a))
+* stop using [skip ci] in release-notes preview commits ([2e5c610](https://github.com/saifAventus/release-note-tester/commit/2e5c61056e7529f2e70687d0b6336a72bbb1e0d7))
+
+
+### Features
+
+* updated the ([e6f4b63](https://github.com/saifAventus/release-note-tester/commit/e6f4b63d9b57eeba27199ec9cb339429784dc9bc))
+
 ## [1.21.2](https://github.com/saifAventus/release-note-tester/compare/v1.21.1...v1.21.2) (2026-09-21)
 
 
