@@ -1,13 +1,9 @@
 # Release Notes
 
-Current Version: v1.21.2
-Expected Release Version: v1.22.0
+Current Version: v1.22.0
+Expected Release Version: v1.22.1
 Status: QA
-
-## Features
-
-- Updated the
 
 ## Bug Fixes
 
-- DRNT2-120 - Colour issue
+- DRNT2-121 - FONTT ISSUE
