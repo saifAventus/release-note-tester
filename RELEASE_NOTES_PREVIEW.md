@@ -1,7 +1,12 @@
 # Release Notes
 
 Current Version: v1.18.0
-Expected Release Version: (no releasable changes)
+Expected Release Version: v1.19.0
 Status: QA
 
-_No releasable conventional commits found since the current version._
+## Features
+
+- DRNT2-100 - Updated app 1
+- Add release-branch release notes preview flow
+- DRNT2-108 - Updae the colour
+- DRNT2-109 - Test SMS fallback verification workflow
