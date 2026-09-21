@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/saifAventus/release-note-tester/compare/v1.21.0...v1.21.1) (2026-09-21)
+
+
+### Bug Fixes
+
+* **[DRNT2-109](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-109):** verify semantic-release and jira on dev ([6cb3026](https://github.com/saifAventus/release-note-tester/commit/6cb302604430a81cdffa2ffbba3f3626640e239a))
+
 # [1.21.0](https://github.com/saifAventus/release-note-tester/compare/v1.20.0...v1.21.0) (2026-09-21)
 
 
