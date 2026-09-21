@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/saifAventus/release-note-tester/compare/v1.22.0...v1.22.1) (2026-09-21)
+
+
+### Bug Fixes
+
+* **[DRNT2-121](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-121):** FONTT ISSUE ([6a76490](https://github.com/saifAventus/release-note-tester/commit/6a76490b102c78e96c9ccdc15a36106516fb70b4))
+
 # [1.22.0](https://github.com/saifAventus/release-note-tester/compare/v1.21.2...v1.22.0) (2026-09-21)
 
 
