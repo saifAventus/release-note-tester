@@ -3,6 +3,7 @@ name: Release Notes Preview
 on:
   push:
     branches:
+      - qa
       - "release/**"
 
 jobs:
@@ -43,7 +44,7 @@ jobs:
           path: RELEASE_NOTES_PREVIEW.md
           if-no-files-found: error
 
-      - name: Commit preview file to release branch
+      - name: Commit preview file to branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -57,3 +58,27 @@ jobs:
 
           git commit -m "chore: update RELEASE_NOTES_PREVIEW.md"
           git push
+
+      # QA-facing Jira RC — only when merging into qa (not on every release/** push)
+      - name: Create Jira Preview Release (RC)
+        if: github.ref == 'refs/heads/qa'
+        env:
+          JIRA_SERVER_URL: ${{ secrets.JIRA_SERVER_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          SEMANTIC_RELEASE_JIRA_SERVER_URL: ${{ secrets.JIRA_SERVER_URL }}
+          SEMANTIC_RELEASE_JIRA_USERNAME: ${{ secrets.JIRA_USER_EMAIL }}
+          SEMANTIC_RELEASE_JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: |
+          VERSION=$(node -e "
+            const fs = require('fs');
+            const text = fs.readFileSync('RELEASE_NOTES_PREVIEW.md', 'utf8');
+            const match = text.match(/Expected Release Version:\\s*v?(\\d+\\.\\d+\\.\\d+)/i);
+            if (!match) {
+              console.error('Could not parse Expected Release Version from RELEASE_NOTES_PREVIEW.md');
+              process.exit(1);
+            }
+            console.log(match[1]);
+          ")
+          echo "Base version for Jira RC: $VERSION"
+          node ./scripts/jira-release.js "$VERSION" --preview

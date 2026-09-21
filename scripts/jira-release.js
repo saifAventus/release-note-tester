@@ -1,15 +1,25 @@
 #!/usr/bin/env node
 
 /**
- * Official Jira release integration (Semantic Release publishCmd only).
+ * Jira release integration
  *
- * 1. Create/open Jira version as UNRELEASED
- * 2. Attach fixVersion to tickets found in commits since previous tag
- * 3. Transition tickets to Released/Done when possible
- * 4. Mark Jira version as released
+ * Modes:
+ *   --production  Final release (Semantic Release publishCmd). Creates/updates
+ *                 {prefix}{version}, attaches fixVersions, transitions issues,
+ *                 marks released=true.
+ *   --preview     QA release candidate. Creates {prefix}{version}-rc.N as
+ *                 unreleased, with RELEASE_NOTES_PREVIEW.md in the description.
+ *                 Does NOT create Git tags or transition tickets to Done.
+ *
+ * Usage:
+ *   node ./scripts/jira-release.js "1.22.1" --production
+ *   node ./scripts/jira-release.js "1.22.1" --preview
+ *   node ./scripts/jira-release.js "1.22.1"   # defaults to --production
  */
 
 import { execSync } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 const JIRA_URL = (
   process.env.JIRA_SERVER_URL ||
@@ -29,6 +39,46 @@ const PROJECT_KEY = process.env.JIRA_PROJECT_KEY || "DRNT2";
 const VERSION_PREFIX =
   process.env.JIRA_VERSION_PREFIX || "release-note-tester-v";
 const TICKET_REGEX = new RegExp(`${PROJECT_KEY}-\\d+`, "g");
+const PREVIEW_NOTES_FILE = resolve(process.cwd(), "RELEASE_NOTES_PREVIEW.md");
+
+function parseArgs(argv) {
+  const args = argv.slice(2);
+  let version = null;
+  let mode = null;
+
+  for (const arg of args) {
+    if (arg === "--preview" || arg === "--production") {
+      if (mode) {
+        throw new Error(`Multiple modes specified. Use only one of --preview or --production.`);
+      }
+      mode = arg.slice(2);
+      continue;
+    }
+    if (arg.startsWith("--")) {
+      throw new Error(
+        `Unknown release mode/flag: ${arg}\n\nSupported modes:\n--preview\n--production`,
+      );
+    }
+    if (!version) {
+      version = arg;
+      continue;
+    }
+    throw new Error(`Unexpected argument: ${arg}`);
+  }
+
+  // Backward compatible: no mode → production (Semantic Release publishCmd)
+  if (!mode) mode = "production";
+
+  return { version, mode };
+}
+
+function requireCredentials() {
+  if (!JIRA_EMAIL || !JIRA_TOKEN) {
+    throw new Error(
+      "Jira credentials are not configured.\nSet JIRA_USER_EMAIL / JIRA_API_TOKEN (or SEMANTIC_RELEASE_JIRA_*).",
+    );
+  }
+}
 
 async function jiraRequest(endpoint, options = {}) {
   const url = `${JIRA_URL}${endpoint}`;
@@ -77,12 +127,10 @@ function getPreviousTag(currentVersion) {
       : `v${currentVersion}`
     : null;
 
-  // publishCmd usually runs after the new tag exists → use index [1]
   if (currentTag && tags[0] === currentTag) {
     return tags[1] || null;
   }
 
-  // New tag not visible yet → latest tag is the previous release
   return tags[0];
 }
 
@@ -195,21 +243,193 @@ async function transitionIssue(ticketKey, issue) {
   console.log(`  ✅ ${ticketKey} transitioned to "${targetTransition.to.name}"`);
 }
 
-async function run() {
-  const rawVersion = process.argv[2];
-  if (!rawVersion) {
-    console.error(
-      "❌ Error: Release version argument is required (e.g. node jira-release.js 1.7.0)",
+function versionBrowseUrl(versionId) {
+  return `${JIRA_URL}/projects/${PROJECT_KEY}/versions/${versionId}/tab/release-report-all-issues`;
+}
+
+function readPreviewNotes() {
+  if (!existsSync(PREVIEW_NOTES_FILE)) {
+    throw new Error(
+      "RELEASE_NOTES_PREVIEW.md was not found.\nCannot create Jira preview release.",
     );
-    process.exit(1);
   }
 
-  const cleanVersion = rawVersion.replace(/^v/, "");
+  const notes = readFileSync(PREVIEW_NOTES_FILE, "utf-8").trim();
+  if (!notes) {
+    throw new Error(
+      "RELEASE_NOTES_PREVIEW.md is empty.\nCannot create Jira preview release.",
+    );
+  }
+
+  if (/no releasable conventional commits/i.test(notes)) {
+    throw new Error(
+      "RELEASE_NOTES_PREVIEW.md has no releasable changes.\nCannot create Jira preview release.",
+    );
+  }
+
+  return notes;
+}
+
+function buildPreviewDescription(baseVersion, rcName, notes) {
+  return [
+    "Release Candidate",
+    "",
+    `Version: ${rcName}`,
+    "Status: QA",
+    `Base Version: ${VERSION_PREFIX}${baseVersion}`,
+    "",
+    "Release Notes",
+    "",
+    notes,
+    "",
+    "QA Checklist",
+    "",
+    "- [ ] Functional testing",
+    "- [ ] Regression testing",
+    "- [ ] Sign-off",
+  ].join("\n");
+}
+
+/**
+ * Find next RC number from existing Jira versions.
+ * Matches: {prefix}{base}-rc.N  and also bare {base}-rc.N / v{base}-rc.N
+ *
+ * Idempotency: each successful preview run creates the NEXT rc.N.
+ * If create hits a duplicate-name race, we update that version's description.
+ */
+function getNextRcNumber(versions, baseVersion) {
+  const escapedPrefix = VERSION_PREFIX.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const escapedBase = baseVersion.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const patterns = [
+    new RegExp(`^${escapedPrefix}${escapedBase}-rc\\.(\\d+)$`, "i"),
+    new RegExp(`^v?${escapedBase}-rc\\.(\\d+)$`, "i"),
+  ];
+
+  let max = 0;
+  for (const v of versions) {
+    for (const re of patterns) {
+      const m = v.name?.match(re);
+      if (m) {
+        max = Math.max(max, Number.parseInt(m[1], 10) || 0);
+      }
+    }
+  }
+
+  return max + 1;
+}
+
+async function runPreview(cleanVersion) {
+  console.log(`
+========================================
+JIRA RELEASE
+========================================
+
+Mode: preview
+Base version: ${cleanVersion}
+`);
+
+  requireCredentials();
+  const notes = readPreviewNotes();
+  console.log(`Reading:\n${PREVIEW_NOTES_FILE}\n`);
+
+  const project = await jiraRequest(`/rest/api/3/project/${PROJECT_KEY}`);
+  console.log(`Jira project:\n${PROJECT_KEY} (${project.name})\n`);
+
+  const versions = await jiraRequest(
+    `/rest/api/3/project/${PROJECT_KEY}/versions`,
+  );
+  const rcNumber = getNextRcNumber(versions, cleanVersion);
+  const rcName = `${VERSION_PREFIX}${cleanVersion}-rc.${rcNumber}`;
+
+  console.log(`RC version: ${rcName}`);
+  console.log(`\nCreating Jira version:\n${rcName}\n`);
+  console.log(`Released:\nfalse\n`);
+
+  const description = buildPreviewDescription(cleanVersion, rcName, notes);
+
+  let targetVersion = versions.find((v) => v.name === rcName);
+
+  if (targetVersion) {
+    // Idempotent retry: update description on existing RC instead of creating a duplicate
+    console.log(
+      `ℹ️  Version "${rcName}" already exists (ID: ${targetVersion.id}). Updating description.`,
+    );
+    targetVersion = await jiraRequest(`/rest/api/3/version/${targetVersion.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        description,
+        released: false,
+        releaseDate: null,
+      }),
+    });
+  } else {
+    try {
+      targetVersion = await jiraRequest("/rest/api/3/version", {
+        method: "POST",
+        body: JSON.stringify({
+          name: rcName,
+          projectId: Number(project.id),
+          released: false,
+          description,
+        }),
+      });
+    } catch (err) {
+      // Race / retry: version created by a concurrent run
+      if (/already exists|duplicate|400/i.test(err.message)) {
+        const refreshed = await jiraRequest(
+          `/rest/api/3/project/${PROJECT_KEY}/versions`,
+        );
+        targetVersion = refreshed.find((v) => v.name === rcName);
+        if (!targetVersion) throw err;
+        console.log(
+          `ℹ️  Version "${rcName}" appeared during create. Updating description.`,
+        );
+        targetVersion = await jiraRequest(
+          `/rest/api/3/version/${targetVersion.id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              description,
+              released: false,
+              releaseDate: null,
+            }),
+          },
+        );
+      } else {
+        throw new Error(
+          `Failed to create Jira preview version.\n${err.message}\nThe Jira API user may not have permission to create project versions.`,
+        );
+      }
+    }
+  }
+
+  const url = versionBrowseUrl(targetVersion.id);
+
+  console.log(`Preview release created successfully.
+
+Jira project: ${PROJECT_KEY}
+Version: ${rcName}
+Status: Unreleased
+URL: ${url}
+========================================
+`);
+
+  return targetVersion;
+}
+
+async function runProduction(cleanVersion) {
   const versionName = `${VERSION_PREFIX}${cleanVersion}`;
 
-  console.log(
-    `\n🚀 [Jira Release] Starting automated Jira release for version: ${versionName}`,
-  );
+  console.log(`
+========================================
+JIRA RELEASE
+========================================
+
+Mode: production
+Version: ${versionName}
+
+Creating production Jira release.
+`);
 
   if (!JIRA_EMAIL || !JIRA_TOKEN) {
     console.warn(
@@ -218,79 +438,117 @@ async function run() {
     return;
   }
 
+  console.log(
+    `🔍 [Jira Release] Fetching project details for ${PROJECT_KEY}...`,
+  );
+  const project = await jiraRequest(`/rest/api/3/project/${PROJECT_KEY}`);
+  console.log(
+    `✅ [Jira Release] Connected to project: ${project.name} (ID: ${project.id})`,
+  );
+
+  console.log(
+    `🔍 [Jira Release] Checking if version "${versionName}" exists...`,
+  );
+  const versions = await jiraRequest(
+    `/rest/api/3/project/${PROJECT_KEY}/versions`,
+  );
+  let targetVersion = versions.find((v) => v.name === versionName);
+
+  if (targetVersion) {
+    console.log(
+      `ℹ️  [Jira Release] Version "${versionName}" already exists (ID: ${targetVersion.id}).`,
+    );
+    targetVersion = await ensureVersionUnreleased(targetVersion, versionName);
+  } else {
+    console.log(
+      `✨ [Jira Release] Creating new version "${versionName}" (unreleased)...`,
+    );
+    targetVersion = await jiraRequest("/rest/api/3/version", {
+      method: "POST",
+      body: JSON.stringify({
+        name: versionName,
+        projectId: Number(project.id),
+        released: false,
+        description: `Automated release ${versionName}`,
+      }),
+    });
+    console.log(
+      `🎉 [Jira Release] Created Jira Version "${versionName}" (ID: ${targetVersion.id})`,
+    );
+  }
+
+  const tickets = getTicketsFromGit(cleanVersion);
+  console.log(
+    `📋 [Jira Release] Found ${tickets.length} ticket(s) in release commits: ${tickets.join(", ") || "(none)"}`,
+  );
+
+  for (const ticketKey of tickets) {
+    try {
+      console.log(`\n🔄 [Jira Release] Processing ticket ${ticketKey}...`);
+      const issue = await attachFixVersion(
+        ticketKey,
+        targetVersion,
+        versionName,
+      );
+      await transitionIssue(ticketKey, issue);
+    } catch (err) {
+      console.error(`  ❌ Failed processing ticket ${ticketKey}:`, err.message);
+    }
+  }
+
+  await markVersionReleased(targetVersion, versionName);
+
+  console.log(`
+Released:
+true
+
+Production release created successfully.
+========================================
+`);
+}
+
+async function run() {
+  let version;
+  let mode;
+
   try {
-    console.log(
-      `🔍 [Jira Release] Fetching project details for ${PROJECT_KEY}...`,
-    );
-    const project = await jiraRequest(`/rest/api/3/project/${PROJECT_KEY}`);
-    console.log(
-      `✅ [Jira Release] Connected to project: ${project.name} (ID: ${project.id})`,
-    );
-
-    console.log(
-      `🔍 [Jira Release] Checking if version "${versionName}" exists...`,
-    );
-    const versions = await jiraRequest(
-      `/rest/api/3/project/${PROJECT_KEY}/versions`,
-    );
-    let targetVersion = versions.find((v) => v.name === versionName);
-
-    if (targetVersion) {
-      console.log(
-        `ℹ️  [Jira Release] Version "${versionName}" already exists (ID: ${targetVersion.id}).`,
-      );
-      targetVersion = await ensureVersionUnreleased(targetVersion, versionName);
-    } else {
-      console.log(
-        `✨ [Jira Release] Creating new version "${versionName}" (unreleased)...`,
-      );
-      targetVersion = await jiraRequest("/rest/api/3/version", {
-        method: "POST",
-        body: JSON.stringify({
-          name: versionName,
-          projectId: Number(project.id),
-          released: false,
-          description: `Automated release ${versionName}`,
-        }),
-      });
-      console.log(
-        `🎉 [Jira Release] Created Jira Version "${versionName}" (ID: ${targetVersion.id})`,
-      );
-    }
-
-    const tickets = getTicketsFromGit(cleanVersion);
-    console.log(
-      `📋 [Jira Release] Found ${tickets.length} ticket(s) in release commits: ${tickets.join(", ") || "(none)"}`,
-    );
-
-    for (const ticketKey of tickets) {
-      try {
-        console.log(`\n🔄 [Jira Release] Processing ticket ${ticketKey}...`);
-        const issue = await attachFixVersion(
-          ticketKey,
-          targetVersion,
-          versionName,
-        );
-        await transitionIssue(ticketKey, issue);
-      } catch (err) {
-        console.error(
-          `  ❌ Failed processing ticket ${ticketKey}:`,
-          err.message,
-        );
-      }
-    }
-
-    await markVersionReleased(targetVersion, versionName);
-
-    console.log(
-      `\n🏁 [Jira Release] Release ${versionName} completed successfully!\n`,
-    );
+    ({ version, mode } = parseArgs(process.argv));
   } catch (err) {
+    console.error(`\n❌ ${err.message}\n`);
+    process.exit(1);
+  }
+
+  if (!version) {
     console.error(
-      `\n❌ [Jira Release] Error processing Jira release:`,
-      err.message,
+      "❌ Error: Release version argument is required (e.g. node jira-release.js 1.22.1 --preview)",
     );
-    // Don't fail the entire CI pipeline if Jira is unreachable, but log clearly
+    process.exit(1);
+  }
+
+  const cleanVersion = version.replace(/^v/, "");
+
+  try {
+    if (mode === "preview") {
+      await runPreview(cleanVersion);
+      return;
+    }
+
+    if (mode === "production") {
+      await runProduction(cleanVersion);
+      return;
+    }
+
+    console.error(
+      `Unknown release mode: ${mode}\n\nSupported modes:\n--preview\n--production`,
+    );
+    process.exit(1);
+  } catch (err) {
+    console.error(`\n❌ [Jira Release] ${err.message}\n`);
+    // Preview must fail the CI job so missing notes / API errors are visible.
+    // Production keeps soft-fail behaviour so Semantic Release is not blocked by Jira outages.
+    if (mode === "preview") {
+      process.exit(1);
+    }
   }
 }
 

@@ -35,7 +35,7 @@
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "node ./scripts/jira-release.js \"${nextRelease.version}\""
+        "publishCmd": "node ./scripts/jira-release.js \"${nextRelease.version}\" --production"
       }
     ],
 
