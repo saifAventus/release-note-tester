@@ -1,9 +1,7 @@
 # Release Notes
 
 Current Version: v1.22.1
-Expected Release Version: v1.22.2
+Expected Release Version: (no releasable changes)
 Status: QA
 
-## Bug Fixes
-
-- DRNT2-121 - FONTT ISSUE
+_No releasable conventional commits found since the current version._
