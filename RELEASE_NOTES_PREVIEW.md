@@ -7,3 +7,7 @@ Status: QA
 ## Features
 
 - Updated the
+
+## Bug Fixes
+
+- DRNT2-120 - Colour issue
