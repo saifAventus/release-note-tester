@@ -1,3 +1,10 @@
+## [1.22.2](https://github.com/saifAventus/release-note-tester/compare/v1.22.1...v1.22.2) (2026-09-21)
+
+
+### Bug Fixes
+
+* parse Jira RC version from RELEASE_NOTES_PREVIEW.md reliably ([3ee9fa0](https://github.com/saifAventus/release-note-tester/commit/3ee9fa02d744eb9a6eb0d7b84c210409632202c4))
+
 ## [1.22.1](https://github.com/saifAventus/release-note-tester/compare/v1.22.0...v1.22.1) (2026-09-21)
 
 
