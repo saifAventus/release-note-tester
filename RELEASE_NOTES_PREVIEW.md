@@ -11,3 +11,4 @@ Status: QA
 ## Bug Fixes
 
 - Parse Jira RC version from RELEASE_NOTES_PREVIEW.md reliably
+- Drop [skip ci] from release commits and allow manual preview runs
