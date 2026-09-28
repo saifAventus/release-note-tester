@@ -1,10 +1,7 @@
 # Release Notes
 
-Current Version: v1.23.0
-Expected Release Version: v1.24.0
+Current Version: v1.24.0
+Expected Release Version: (no releasable changes)
 Status: QA
 
-## Features
-
-- DRNT2-123 - Dummy Task 1 - Validate basic workflow
-- DRNT2-124 - Dummy Task 2 - Smoke test notifications
+_No releasable conventional commits found since the current version._
