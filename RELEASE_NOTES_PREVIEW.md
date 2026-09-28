@@ -1,10 +1,9 @@
 # Release Notes
 
-Current Version: v1.22.1
-Expected Release Version: v1.22.2
+Current Version: v1.22.2
+Expected Release Version: v1.23.0
 Status: QA
 
-## Bug Fixes
+## Features
 
-- DRNT2-121 - FONTT ISSUE
-- Parse Jira RC version from RELEASE_NOTES_PREVIEW.md reliably
+- DRNT2-122 - Updated colour code
