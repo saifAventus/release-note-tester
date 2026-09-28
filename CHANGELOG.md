@@ -1,3 +1,12 @@
+# [1.25.0](https://github.com/saifAventus/release-note-tester/compare/v1.24.0...v1.25.0) (2026-09-28)
+
+
+### Features
+
+* **[DRNT2-123](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-123):** Dummy Task 1 - Validate basic workflow ([e207bbb](https://github.com/saifAventus/release-note-tester/commit/e207bbbf0a8eb7018d30b6b53e26cff98f21972b))
+* **[DRNT2-124](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-124):** Dummy Task 2 - Smoke test notifications ([736eb52](https://github.com/saifAventus/release-note-tester/commit/736eb524977f17ab98ad6c3d6a993b5b942a3975))
+* **[DRNT2-125](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-125):** Dummy Task 3 - Verify attachments upload ([e9beed1](https://github.com/saifAventus/release-note-tester/commit/e9beed1334d70ee66514b0413bbd95c914905ac3))
+
 # [1.24.0](https://github.com/saifAventus/release-note-tester/compare/v1.23.0...v1.24.0) (2026-09-28)
 
 
