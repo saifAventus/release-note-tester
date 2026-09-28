@@ -1,7 +1,9 @@
 # Release Notes
 
 Current Version: v1.25.0
-Expected Release Version: (no releasable changes)
+Expected Release Version: v1.26.0
 Status: QA
 
-_No releasable conventional commits found since the current version._
+## Features
+
+- DRNT2-126 - Dummy Task 4 - Check labels and search
