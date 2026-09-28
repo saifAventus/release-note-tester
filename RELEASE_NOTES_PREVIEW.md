@@ -1,7 +1,9 @@
 # Release Notes
 
 Current Version: v1.24.0
-Expected Release Version: (no releasable changes)
+Expected Release Version: v1.25.0
 Status: QA
 
-_No releasable conventional commits found since the current version._
+## Features
+
+- DRNT2-125 - Dummy Task 3 - Verify attachments upload
