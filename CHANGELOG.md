@@ -1,3 +1,16 @@
+# [1.23.0](https://github.com/saifAventus/release-note-tester/compare/v1.22.2...v1.23.0) (2026-09-28)
+
+
+### Bug Fixes
+
+* **ci:** drop [skip ci] from release commits and allow manual preview runs ([37f490b](https://github.com/saifAventus/release-note-tester/commit/37f490b4d8cd45656dbe33d98fd34feb2cc90058))
+* parse Jira RC version from RELEASE_NOTES_PREVIEW.md reliably ([eb81e12](https://github.com/saifAventus/release-note-tester/commit/eb81e12e1a7d4fe9b404763e1d635f6a79cca24c))
+
+
+### Features
+
+* **[DRNT2-122](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-122):** updated colour code ([1795347](https://github.com/saifAventus/release-note-tester/commit/1795347335b48f37540c4b3680dc903e7c69ec9a))
+
 ## [1.22.2](https://github.com/saifAventus/release-note-tester/compare/v1.22.1...v1.22.2) (2026-09-21)
 
 
