@@ -2,6 +2,8 @@
 
 Current Version: v1.25.0
 Expected Release Version: v1.26.0
+Current Version: v1.25.0
+Expected Release Version: v1.26.0
 Status: QA
 
 ## Features
