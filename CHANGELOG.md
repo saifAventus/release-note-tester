@@ -1,3 +1,18 @@
+# [1.26.0](https://github.com/saifAventus/release-note-tester/compare/v1.25.0...v1.26.0) (2026-09-28)
+
+
+### Bug Fixes
+
+* **[DRNT2-134](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-134):** Fix 500 error when submitting profile form with special characters ([f5545f4](https://github.com/saifAventus/release-note-tester/commit/f5545f4d724656925b4fa9c520b0d5a9bfc5b851))
+* **[DRNT2-134](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-134):** Fix 500 error when submitting profile form with special characters ([f5c5dfe](https://github.com/saifAventus/release-note-tester/commit/f5c5dfedda12b946144c015868c9e35752ffd563))
+* **[DRNT2-135](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-135):** Resolve responsive grid layout overlap on mobile screens (<480px) ([045cccd](https://github.com/saifAventus/release-note-tester/commit/045cccd854359c31ad4e8faaa1122d6e848d3a53))
+
+
+### Features
+
+* **[DRNT2-126](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-126):** Dummy Task 4 - Check labels and search ([533260f](https://github.com/saifAventus/release-note-tester/commit/533260f0b46dbee1dad97264e67d667dc6d029dd))
+* **[DRNT2-126](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-126):** Dummy Task 4 - Check labels and search ([ed8feac](https://github.com/saifAventus/release-note-tester/commit/ed8feaca31efb65f66c27bdf4e5af9a2b62b4700))
+
 # [1.25.0](https://github.com/saifAventus/release-note-tester/compare/v1.24.0...v1.25.0) (2026-09-28)
 
 
