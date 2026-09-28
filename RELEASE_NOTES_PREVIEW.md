@@ -11,3 +11,4 @@ Status: QA
 ## Bug Fixes
 
 - DRNT2-134 - Fix 500 error when submitting profile form with special characters
+- DRNT2-135 - Resolve responsive grid layout overlap on mobile screens (<480px)
