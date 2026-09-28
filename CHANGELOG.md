@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/saifAventus/release-note-tester/compare/v1.26.0...v1.26.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* **[DRNT2-136](https://aventusinformatics-team-xa3a5udd.atlassian.net/browse/DRNT2-136):** Session expiration modal does not redirect to login after timeout ([25cabac](https://github.com/saifAventus/release-note-tester/commit/25cabacdaaca5724f4fba943eff9295ad11044d9))
+
 # [1.26.0](https://github.com/saifAventus/release-note-tester/compare/v1.25.0...v1.26.0) (2026-09-28)
 
 
